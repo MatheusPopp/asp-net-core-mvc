@@ -1,0 +1,6 @@
+//Arquivo para a configuracao do DB, string de conexao mySql
+{
+  "ConnectionStrings": {
+    "MVCDB": "server=localhost;userid=root;password=;database=MVCDB"
+  }
+}

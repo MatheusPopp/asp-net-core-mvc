@@ -1,0 +1,60 @@
+﻿@using WebApplication1.Entity
+@model WebApplication1.Entity.Empresa
+
+@{
+    ViewData["Title"] = "CadastroEmpresa";
+}
+
+<h2>CadastroEmpresa</h2>
+
+<h4>Empresa</h4>
+<ul>
+    @foreach(var person in ViewBag.list)
+    {
+        <li>@person.Nome</li>
+    }
+
+</ul>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="container">
+            @using (Html.BeginForm("CadastrarEmpresa", "Empresa", FormMethod.Post))
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nome, "Nome", htmlAttributes: new { @class = "form-label" })
+             
+                    @Html.EditorFor(m => m.Nome)
+                    
+                    @Html.ValidationMessageFor(m => m.Nome, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Usuario, "Fundador da Empresa")
+
+                    @Html.DropDownListFor(m => m.Usuario, new SelectList(ViewBag.list, "Nome", "Nome"), "Selecione o fundador")
+                    @Html.ValidationMessageFor(m => m.Usuario, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AnoFundacao, "Ano de Fundação")
+                    @Html.EditorFor(m => m.AnoFundacao)
+                    @Html.ValidationMessageFor(m => m.AnoFundacao, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Descricao, "Descrição")
+                    @Html.EditorFor(m => m.Descricao)
+                    @Html.ValidationMessageFor(m => m.Descricao, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar" class="btn btn-default" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
