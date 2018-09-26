@@ -1,9 +1,18 @@
-﻿@model WebApplication1.Entity.Empresa
+﻿@model List<WebApplication1.Entity.Empresa>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2></h2>
+<h2>Empresas</h2>
+
+<table>
+
+    @foreach(var item in Model)
+    {
+        <span>@item.Nome</span>
+    }
+
+</table>
 
 
 <button class="btn btn-primary">

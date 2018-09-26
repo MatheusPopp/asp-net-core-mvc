@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DataAccess;
 using WebApplication1.Entity;
 
 namespace WebApplication1.Controllers
 {
     public class EmpresaController : Controller
     {
+        private readonly IEmpresaRepository _empresaRepository;
+
+        public EmpresaController(IEmpresaRepository empresaRepository)
+        {
+            _empresaRepository = empresaRepository;
+        }
         public IActionResult Index()
         {
-            return View();
+            List<Empresa> empresas = new List<Empresa>();
+
+            empresas = _empresaRepository.ListarEmpresas();
+
+            return View(empresas);
         }
 
         public IActionResult CadastroEmpresa()
@@ -39,11 +50,13 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
         [HttpPost]
         public IActionResult CadastrarEmpresa(Empresa empresa)
         {
+            _empresaRepository.CadastrarEmpresa(empresa);
 
-            return View("CadastroEmpresa",empresa);
+            return View();
         }
     }
 }
